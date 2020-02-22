@@ -27,7 +27,7 @@ namespace Docdown.Util
 
             var sb = new StringBuilder();
             sb.AppendLine("@echo off");
-            sb.AppendLine("timeout 4");
+            sb.AppendLine("timeout 2");
             sb.Append("copy /b/y \"").Append(tempFile).Append("\" \"").Append(curFile).AppendLine("\"");
             sb.Append("start \"\" \"").Append(curFile).AppendLine("\"");
             sb.AppendLine("exit");
@@ -57,7 +57,7 @@ namespace Docdown.Util
 
         public static async Task<byte[]> DownloadNewestVersion(IProgress<WebDownloadProgress> progress)
         {
-            const string Repo = "https://api.github.com/repos/Darkgaja/Docdown/releases/latest";
+            const string Repo = "https://api.github.com/repos/science-docs/Docdown/releases/latest";
 
             var json = await WebUtility.SimpleJsonRequest(Repo);
             var url = json.SelectToken("assets").First().SelectToken("browser_download_url").Value<string>();
